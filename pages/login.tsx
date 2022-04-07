@@ -68,7 +68,7 @@ const Login = () => {
               <p className="text-7xl font-medium text-gray-200">
                 Travel User
                 <p className="mt-2 text-sm font-medium text-white opacity-40">
-                  Build for Datacakra portfolio test
+                  Build for datacakra portfolio test
                 </p>
               </p>
             </div>
