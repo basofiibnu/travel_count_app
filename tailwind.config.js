@@ -4,7 +4,12 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'login-screen':
+          "url('https://wallpaperaccess.com/full/1431786.jpg')",
+      },
+    },
   },
   plugins: [],
-}
+};
