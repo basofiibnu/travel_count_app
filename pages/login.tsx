@@ -1,11 +1,59 @@
-import React from 'react';
-import Router from 'next/router';
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import { SiYourtraveldottv } from 'react-icons/si';
-import { AiOutlineUser } from 'react-icons/ai';
+import { AiOutlineUser, AiOutlineMail } from 'react-icons/ai';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import Head from 'next/head';
+import Input from '../components/Input';
+import { ClipLoader } from 'react-spinners';
+
+import { useSetRecoilState } from 'recoil';
+import { authState } from '../atoms/states';
 
 const Login = () => {
+  const [isSignin, setIsSignin] = useState(true);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+  const Router = useRouter();
+
+  const setAuthState = useSetRecoilState(authState);
+
+  const onSubmit = async (e: any) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const response = await fetch(
+      `/api/${isSignin ? 'login' : 'register'}`,
+      {
+        method: 'POST',
+        body: isSignin
+          ? JSON.stringify({
+              email: email,
+              password: password,
+            })
+          : JSON.stringify({
+              email: email,
+              password: password,
+              name: username,
+            }),
+      },
+    );
+
+    const data = await response.json();
+    const { data: responseData } = data;
+
+    setLoading(false);
+    window.localStorage.setItem(
+      'user',
+      JSON.stringify(responseData.data),
+    );
+    setAuthState(responseData.data);
+
+    Router.push('/');
+  };
+
   return (
     <div>
       <Head>
@@ -19,36 +67,98 @@ const Login = () => {
               <SiYourtraveldottv />
             </div>
             <div className="flex h-screen flex-col items-center justify-center gap-28">
-              <div className="flex w-full max-w-sm flex-col gap-6">
-                <label>
-                  <div className="flex w-full flex-row items-center gap-3 rounded-md border border-gray-300 py-4 px-6 transition-all duration-150 ease-in-out hover:border-gray-400 focus:border-gray-400">
-                    <AiOutlineUser />
-                    <input
-                      type="text"
-                      placeholder="Username"
+              {isSignin && (
+                <form className="w-full max-w-sm" onSubmit={onSubmit}>
+                  <div className="flex flex-col gap-6">
+                    <Input
+                      type="email"
+                      placeholder="Email"
                       className="w-full bg-transparent text-sm outline-none"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      icon={<AiOutlineMail />}
                     />
-                  </div>
-                </label>
-                <label>
-                  <div className="flex w-full flex-row items-center gap-3 rounded-md border border-gray-300 py-4 px-6 transition-all duration-150 ease-in-out hover:border-gray-400 focus:border-gray-400">
-                    <RiLockPasswordLine />
-                    <input
+                    <Input
                       type="password"
                       placeholder="Password"
                       className="w-full bg-transparent text-sm outline-none"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                      icon={<RiLockPasswordLine />}
                     />
+                    <div className="flex flex-row items-center justify-between">
+                      <p
+                        className="cursor-pointer text-sm font-semibold text-gray-400"
+                        onClick={() => setIsSignin(false)}
+                      >
+                        Register
+                      </p>
+
+                      {loading ? (
+                        <ClipLoader size={30} color="#1E40AF" />
+                      ) : (
+                        <button className="rounded-md bg-blue-800 px-5 py-3 text-sm text-gray-100 transition-all duration-150 ease-in-out hover:bg-blue-900 hover:text-white">
+                          Sign In
+                        </button>
+                      )}
+                    </div>
                   </div>
-                </label>
-                <div className="flex flex-row items-center justify-between">
-                  <span className="cursor-pointer text-sm font-semibold text-gray-400">
-                    Register
-                  </span>
-                  <button className="rounded-md bg-blue-800 px-5 py-3 text-sm text-gray-100 transition-all duration-150 ease-in-out hover:bg-blue-900 hover:text-white">
-                    Sign In
-                  </button>
-                </div>
-              </div>
+                </form>
+              )}
+
+              {!isSignin && (
+                <form className="w-full max-w-sm">
+                  <div className="flex flex-col gap-6">
+                    <Input
+                      type="text"
+                      placeholder="Username"
+                      className="w-full bg-transparent text-sm outline-none"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      required
+                      icon={<AiOutlineUser />}
+                    />
+                    <Input
+                      type="email"
+                      placeholder="Email"
+                      className="w-full bg-transparent text-sm outline-none"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      icon={<AiOutlineMail />}
+                    />
+                    <Input
+                      type="password"
+                      placeholder="Password"
+                      className="w-full bg-transparent text-sm outline-none"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                      icon={<RiLockPasswordLine />}
+                    />
+                    <div className="flex flex-row items-center justify-between">
+                      <p
+                        className="cursor-pointer text-sm font-semibold text-gray-400"
+                        onClick={() => setIsSignin(true)}
+                      >
+                        Sign In
+                      </p>
+                      {loading ? (
+                        <ClipLoader size={30} color="#1E40AF" />
+                      ) : (
+                        <button
+                          type="submit"
+                          className="rounded-md bg-blue-800 px-5 py-3 text-sm text-gray-100 transition-all duration-150 ease-in-out hover:bg-blue-900 hover:text-white"
+                        >
+                          Register
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </form>
+              )}
 
               <div className="flex w-full max-w-sm flex-row items-center justify-between text-sm">
                 <div className="text-gray-400">Login with</div>
