@@ -19,4 +19,5 @@ export interface UserData {
   onPageChange: (page: number) => void;
   currentPage: number;
   loading: boolean;
+  getUserList: () => void;
 }

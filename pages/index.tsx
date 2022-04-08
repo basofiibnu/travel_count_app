@@ -62,6 +62,7 @@ const Home: NextPage = () => {
           onPageChange={setPage}
           currentPage={page}
           loading={loading}
+          getUserList={getUserList}
         />
       </div>
     </div>

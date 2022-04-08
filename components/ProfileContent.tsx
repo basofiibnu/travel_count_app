@@ -5,10 +5,16 @@ import { User } from '../typings';
 
 interface DetailUser {
   userData: User;
-  loading: boolean;
+  loading?: boolean;
+  showDelete: boolean;
+  setShowDelete: (e: boolean) => void;
 }
 
-const ProfileContent = ({ userData }: DetailUser) => {
+const ProfileContent = ({
+  userData,
+  showDelete,
+  setShowDelete,
+}: DetailUser) => {
   return (
     <div className="min-h-screen basis-4/5">
       <div className="px-7 py-5">
@@ -52,6 +58,7 @@ const ProfileContent = ({ userData }: DetailUser) => {
             <button
               type="button"
               className="text-md rounded-lg border border-gray-300 py-2 px-4 text-black transition-all duration-150 ease-in-out hover:scale-110 hover:bg-red-500 hover:text-white"
+              onClick={() => setShowDelete(!showDelete)}
             >
               Delete
             </button>

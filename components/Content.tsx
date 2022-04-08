@@ -1,19 +1,17 @@
 import React from 'react';
 import { HiUsers } from 'react-icons/hi';
-import { FiEdit } from 'react-icons/fi';
-import { MdOutlineDelete } from 'react-icons/md';
-import TimeAgo from 'timeago-react';
 import Pagination from './Pagination';
 import { PuffLoader } from 'react-spinners';
-import Link from 'next/link';
 
 import { UserData } from '../typings';
+import User from './User';
 
 const Content = ({
   userList,
   onPageChange,
   currentPage,
   loading,
+  getUserList,
 }: UserData) => {
   return (
     <div className="min-h-screen basis-4/5">
@@ -69,69 +67,16 @@ const Content = ({
               {!loading &&
                 userList.data &&
                 userList.data.map((user, i) => (
-                  <tr
-                    className="cursor-pointer border-b border-gray-200 transition-all duration-150 ease-in-out hover:bg-gray-100"
+                  <User
+                    createdAt={user.createdat}
                     key={i}
-                  >
-                    <td className="py-6 pl-3 text-left">
-                      <Link
-                        href={{
-                          pathname: '/profile/[id]',
-                          query: {
-                            id: user.id,
-                          },
-                        }}
-                      >
-                        <div className="flex flex-row items-center gap-4">
-                          <img
-                            src={user.tourist_profilepicture}
-                            alt="user-pic"
-                            className="h-10 w-10 rounded-full"
-                          />
-                          <div>
-                            <p className="font-medium hover:underline">
-                              {user.tourist_name}
-                            </p>
-                            <p className="text-gray-500">
-                              {user.tourist_email}
-                            </p>
-                          </div>
-                        </div>
-                      </Link>
-                    </td>
-                    <td>
-                      <TimeAgo
-                        locale="id_ID"
-                        datetime={user.createdat}
-                      />
-                    </td>
-                    <td>{user.tourist_location}</td>
-                    <td>
-                      <div className="flex flex-row items-center gap-4">
-                        <Link
-                          href={{
-                            pathname: '/edit/[id]',
-                            query: {
-                              id: user.id,
-                            },
-                          }}
-                        >
-                          <button
-                            type="button"
-                            className="rounded-lg bg-blue-400 p-2 text-xl text-white transition-all duration-150 ease-in-out hover:scale-110 hover:bg-slate-500"
-                          >
-                            <FiEdit />
-                          </button>
-                        </Link>
-                        <button
-                          type="button"
-                          className="rounded-lg bg-red-400 p-2 text-xl text-white transition-all duration-150 ease-in-out hover:scale-110 hover:bg-red-500"
-                        >
-                          <MdOutlineDelete />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
+                    name={user.tourist_name}
+                    email={user.tourist_email}
+                    id={user.id}
+                    location={user.tourist_location}
+                    profilePic={user.tourist_profilepicture}
+                    getUserList={getUserList}
+                  />
                 ))}
             </tbody>
           </table>

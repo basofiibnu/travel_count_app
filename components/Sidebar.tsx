@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SiYourtraveldottv } from 'react-icons/si';
 import { FiHome } from 'react-icons/fi';
 import { CgAddR, CgLogOut } from 'react-icons/cg';
@@ -6,16 +6,20 @@ import { Auth, authState } from '../atoms/states';
 import Link from 'next/link';
 import { useSetRecoilState } from 'recoil';
 import { useRouter } from 'next/router';
+import Modal from './Modal';
 
 interface SidebarProps {
   data: Auth;
 }
 
 const Sidebar = ({ data }: SidebarProps) => {
+  const [showLogout, setShowLogout] = useState(false);
+  const [loading, setLoading] = useState(false);
   const setAuthState = useSetRecoilState(authState);
   const Router = useRouter();
 
-  const Logout = async () => {
+  const logout = async () => {
+    setLoading(true);
     window.localStorage.removeItem('data');
     setAuthState([]);
 
@@ -71,7 +75,7 @@ const Sidebar = ({ data }: SidebarProps) => {
           </Link>
           <div
             className="mb-3 flex cursor-pointer flex-row items-center rounded-lg px-2 py-3 transition-all duration-100 ease-in-out hover:bg-gray-50"
-            onClick={() => Logout()}
+            onClick={() => setShowLogout(true)}
           >
             <p className="flex flex-row gap-3 font-medium text-gray-500 transition-all duration-100 ease-in-out hover:text-gray-800">
               <span className="text-xl">
@@ -82,6 +86,18 @@ const Sidebar = ({ data }: SidebarProps) => {
           </div>
         </div>
       </div>
+
+      {showLogout && (
+        <Modal
+          title={`Are you sure want to logout?`}
+          submitMsg="Logout"
+          declineMsg="Later"
+          showModal={showLogout}
+          setShowModal={setShowLogout}
+          onSubmit={logout}
+          loadingModal={loading}
+        />
+      )}
     </div>
   );
 };

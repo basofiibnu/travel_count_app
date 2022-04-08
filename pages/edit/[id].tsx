@@ -45,8 +45,6 @@ const EditUser: NextPage = () => {
 
     const data = await response.json();
 
-    console.log(data);
-
     const { message, status } = data;
     setStatus(status);
     setMessage(message);
