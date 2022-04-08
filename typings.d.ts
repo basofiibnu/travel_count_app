@@ -9,13 +9,15 @@ export interface User {
 }
 
 export interface UserData {
-  userList: {
-    page: string;
-    per_page: number;
-    total_pages: number;
-    totalrecord: number;
-    data: [User];
-  };
+  page: string;
+  per_page: number;
+  total_pages: number;
+  totalrecord: number;
+  data: Array<User>;
+}
+
+export interface ContentProps {
+  userData: UserData;
   onPageChange: (page: number) => void;
   currentPage: number;
   loading: boolean;

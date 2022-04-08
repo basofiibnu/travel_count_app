@@ -7,9 +7,10 @@ import { authState } from '../atoms/states';
 import { useRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { UserData } from '../typings';
 
 const Home: NextPage = () => {
-  const [userData, setUserData] = useState([]);
+  const [userData, setUserData] = useState<UserData>();
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [auth, setAuth]: any = useRecoilState(authState);
@@ -47,7 +48,7 @@ const Home: NextPage = () => {
   useEffect(() => {
     getUserList(page);
   }, [page]);
-
+  console.log(userData);
   return (
     <div className="min-h-screen">
       <Head>
@@ -57,13 +58,15 @@ const Home: NextPage = () => {
 
       <div className="flex flex-row">
         <Sidebar data={auth} />
-        <Content
-          userList={userData}
-          onPageChange={setPage}
-          currentPage={page}
-          loading={loading}
-          getUserList={getUserList}
-        />
+        {userData && (
+          <Content
+            userData={userData}
+            onPageChange={setPage}
+            currentPage={page}
+            loading={loading}
+            getUserList={getUserList}
+          />
+        )}
       </div>
     </div>
   );
