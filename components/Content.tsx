@@ -108,12 +108,21 @@ const Content = ({
                     <td>{user.tourist_location}</td>
                     <td>
                       <div className="flex flex-row items-center gap-4">
-                        <button
-                          type="button"
-                          className="rounded-lg bg-blue-400 p-2 text-xl text-white transition-all duration-150 ease-in-out hover:scale-110 hover:bg-slate-500"
+                        <Link
+                          href={{
+                            pathname: '/edit/[id]',
+                            query: {
+                              id: user.id,
+                            },
+                          }}
                         >
-                          <FiEdit />
-                        </button>
+                          <button
+                            type="button"
+                            className="rounded-lg bg-blue-400 p-2 text-xl text-white transition-all duration-150 ease-in-out hover:scale-110 hover:bg-slate-500"
+                          >
+                            <FiEdit />
+                          </button>
+                        </Link>
                         <button
                           type="button"
                           className="rounded-lg bg-red-400 p-2 text-xl text-white transition-all duration-150 ease-in-out hover:scale-110 hover:bg-red-500"

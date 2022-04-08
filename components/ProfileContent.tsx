@@ -34,12 +34,21 @@ const ProfileContent = ({ userData }: DetailUser) => {
             </h1>
           </div>
           <div className="flex flex-row items-center gap-3">
-            <button
-              type="button"
-              className="text-md rounded-lg border border-gray-300 py-2 px-4 text-black transition-all duration-150 ease-in-out hover:scale-110 hover:bg-blue-500 hover:text-white"
+            <Link
+              href={{
+                pathname: '/edit/id',
+                query: {
+                  id: userData.id,
+                },
+              }}
             >
-              Edit
-            </button>
+              <button
+                type="button"
+                className="text-md rounded-lg border border-gray-300 py-2 px-4 text-black transition-all duration-150 ease-in-out hover:scale-110 hover:bg-blue-500 hover:text-white"
+              >
+                Edit
+              </button>
+            </Link>
             <button
               type="button"
               className="text-md rounded-lg border border-gray-300 py-2 px-4 text-black transition-all duration-150 ease-in-out hover:scale-110 hover:bg-red-500 hover:text-white"

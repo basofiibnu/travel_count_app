@@ -1,44 +1,51 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Sidebar from '../components/Sidebar';
+import Sidebar from '../../components/Sidebar';
 import { useRecoilState } from 'recoil';
 import { AiOutlineMail, AiOutlineUser } from 'react-icons/ai';
 import { GrLocation } from 'react-icons/gr';
 
-import { authState } from '../atoms/states';
+import { authState } from '../../atoms/states';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Input from '../components/Input';
+import Input from '../../components/Input';
 import { ClipLoader } from 'react-spinners';
 import { FiArrowLeft } from 'react-icons/fi';
 import Link from 'next/link';
+import { User } from '../../typings';
 
-const AddUser: NextPage = () => {
+const EditUser: NextPage = () => {
   const [auth, setAuth]: any = useRecoilState(authState);
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [message, setMessage] = useState();
-  const [status, setStatus] = useState();
-  const [location, setLocation] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState<string>('');
+  const [name, setName] = useState<string>('');
+  const [message, setMessage] = useState<string>();
+  const [status, setStatus] = useState<number>();
+  const [location, setLocation] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
+  const [userData, setUserData] = useState<User>();
+
+  const { Token } = auth;
 
   const router = useRouter();
 
-  const onAddUser = async (e: any) => {
+  const onUpdateUser = async (e: any) => {
     e.preventDefault();
     setLoading(true);
 
-    const response = await fetch('/api/addUser', {
+    const response = await fetch('/api/updateUser', {
       method: 'POST',
       body: JSON.stringify({
         email,
         name,
         location,
+        id: router.query.id,
         token: auth.Token,
       }),
     });
 
     const data = await response.json();
+
+    console.log(data);
 
     const { message, status } = data;
     setStatus(status);
@@ -53,16 +60,48 @@ const AddUser: NextPage = () => {
     }
   };
 
+  const getUserDetail = async (id: string) => {
+    setLoading(true);
+
+    const baseUrl = `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/Tourist/${id}`;
+
+    try {
+      const response = await fetch(baseUrl, {
+        headers: {
+          Authorization: `Bearer ${Token}`,
+        },
+      });
+      const data = await response.json();
+
+      setUserData(data);
+      setName(data.tourist_name);
+      setLocation(data.tourist_location);
+      setEmail(data.tourist_email);
+    } catch (error) {
+      console.error(error);
+    }
+
+    setLoading(false);
+  };
+
   useEffect(() => {
     if (auth.length === 0) {
       router.push('/login');
     }
   }, [auth]);
 
+  useEffect(() => {
+    if (router.query.id) {
+      getUserDetail(router.query.id.toString());
+    }
+  }, [router.query.id]);
+
   return (
     <div className="min-h-screen">
       <Head>
-        <title>Travel Count App - Add User</title>
+        <title>
+          Travel Count App - Edit {userData?.tourist_name}
+        </title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -83,11 +122,11 @@ const AddUser: NextPage = () => {
 
             <div className="mt-10">
               <h1 className="text-3xl font-semibold tracking-wide">
-                Add New User
+                Edit User
               </h1>
             </div>
 
-            <form onSubmit={onAddUser}>
+            <form onSubmit={onUpdateUser}>
               <div className="mt-10 flex w-full flex-col gap-7">
                 <div className="w-1/2">
                   <p className="mb-2 block text-xs font-bold uppercase tracking-wide text-gray-700">
@@ -140,7 +179,7 @@ const AddUser: NextPage = () => {
                         type="submit"
                         className="rounded-md bg-blue-700 px-5 py-3 text-sm font-semibold text-gray-100 transition-all duration-150 ease-in-out hover:bg-blue-800 hover:text-white"
                       >
-                        Add User
+                        Update
                       </button>
                       {status && (
                         <p
@@ -165,4 +204,4 @@ const AddUser: NextPage = () => {
   );
 };
 
-export default AddUser;
+export default EditUser;
