@@ -42,7 +42,7 @@ const ProfileContent = ({
           <div className="flex flex-row items-center gap-3">
             <Link
               href={{
-                pathname: '/edit/id',
+                pathname: '/edit/[id]',
                 query: {
                   id: userData.id,
                 },

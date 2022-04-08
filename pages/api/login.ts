@@ -4,6 +4,7 @@ import axios from 'axios';
 type Data = {
   message?: string;
   data: string | unknown;
+  status: number;
 };
 
 type Body = {
@@ -38,8 +39,14 @@ export default async function login(
 
     res
       .status(200)
-      .send({ data: response.data, message: response.data.message });
+      .send({
+        data: response.data,
+        message: 'Login Success',
+        status: 200,
+      });
   } catch (error) {
-    res.status(500).send({ message: 'Login Error', data: error });
+    res
+      .status(500)
+      .send({ message: 'Login Error', data: error, status: 500 });
   }
 }

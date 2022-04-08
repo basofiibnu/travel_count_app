@@ -20,7 +20,7 @@ const Sidebar = ({ data }: SidebarProps) => {
 
   const logout = async () => {
     setLoading(true);
-    window.localStorage.removeItem('data');
+    window.localStorage.removeItem('user');
     setAuthState([]);
 
     Router.push('/login');

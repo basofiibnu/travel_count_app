@@ -39,16 +39,19 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     if (auth.length === 0) {
-      Router.push('/login');
-    } else {
-      getUserList();
+      const storage = window.localStorage.getItem('user');
+      if (storage) {
+        setAuth(JSON.parse(storage));
+      } else {
+        Router.push('/login');
+      }
     }
   }, [auth]);
 
   useEffect(() => {
     getUserList(page);
-  }, [page]);
-  console.log(userData);
+  }, [page, Token]);
+
   return (
     <div className="min-h-screen">
       <Head>

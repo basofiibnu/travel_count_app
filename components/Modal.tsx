@@ -40,7 +40,7 @@ const Modal = ({
               </div>
             </div>
             {loadingModal ? (
-              <div className="flex flex-row items-center">
+              <div className="flex w-full flex-row items-center justify-center">
                 <ClipLoader color="#fff" />
               </div>
             ) : (

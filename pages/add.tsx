@@ -55,7 +55,12 @@ const AddUser: NextPage = () => {
 
   useEffect(() => {
     if (auth.length === 0) {
-      router.push('/login');
+      const storage = window.localStorage.getItem('user');
+      if (storage) {
+        setAuth(JSON.parse(storage));
+      } else {
+        router.push('/login');
+      }
     }
   }, [auth]);
 

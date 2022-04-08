@@ -73,8 +73,10 @@ const Pagination = ({
                   : 'cursor-pointer rounded-full hover:scale-125 hover:bg-gray-100'
               }`}
               onClick={() =>
-                pageNumber !== currentPage && onPageChange(pageNumber)
+                pageNumber !== currentPage &&
+                onPageChange(+pageNumber)
               }
+              key={pageNumber}
             >
               {pageNumber}
             </li>
