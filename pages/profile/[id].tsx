@@ -84,7 +84,9 @@ const Profile: NextPage = () => {
   return (
     <div className="min-h-screen">
       <Head>
-        <title>Travel Count App - Detail Profile</title>
+        <title>
+          Travel Count App - Detail {userDetail?.tourist_name}
+        </title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
