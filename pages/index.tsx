@@ -61,7 +61,7 @@ const Home: NextPage = () => {
 
       <div className="flex flex-row">
         <Sidebar data={auth} />
-        {userData && (
+        {userData ? (
           <Content
             userData={userData}
             onPageChange={setPage}
@@ -69,6 +69,13 @@ const Home: NextPage = () => {
             loading={loading}
             getUserList={getUserList}
           />
+        ) : (
+          <div className="flex min-h-screen items-center justify-center">
+            <p className="text-2xl lowercase tracking-wide">
+              there is no data that can be retrieved because api url
+              is served under http, not https.
+            </p>
+          </div>
         )}
       </div>
     </div>
