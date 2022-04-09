@@ -24,7 +24,7 @@ const Modal = ({
   return (
     <Fragment>
       <div className="fixed top-0 left-0 z-50 mx-auto h-screen w-full bg-black/20">
-        <div className="absolute left-[15vw] top-[30vh] md:left-1/4 lg:left-1/3">
+        <div className="absolute left-[3vw] top-[30vh] md:left-1/4 lg:left-1/3">
           <div className="border-1 container mx-auto max-h-80 w-full max-w-md rounded-lg border-indigo-400 bg-indigo-900 p-6 md:w-auto">
             <div className="flex min-w-[250px] max-w-2xl items-center justify-between pb-5 md:min-w-[400px]">
               <div className="text-md font-semibold text-indigo-100">

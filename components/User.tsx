@@ -58,7 +58,7 @@ const User = ({
   return (
     <Fragment>
       <tr className="cursor-pointer border-b border-gray-200 transition-all duration-150 ease-in-out hover:bg-gray-100">
-        <td className="py-6 pl-3 text-left">
+        <td className="py-6 pl-0 text-left md:pl-3">
           <Link
             href={{
               pathname: '/profile/[id]',
@@ -71,7 +71,7 @@ const User = ({
               <img
                 src={profilePic}
                 alt="user-pic"
-                className="h-10 w-10 rounded-full"
+                className="hidden h-10 w-10 rounded-full md:block"
               />
               <div>
                 <p className="font-medium hover:underline">{name}</p>

@@ -90,7 +90,7 @@ const Profile: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="flex flex-row">
+      <div className="flex flex-col lg:flex-row">
         <Sidebar data={auth} />
         {userDetail && (
           <ProfileContent

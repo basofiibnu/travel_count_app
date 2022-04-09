@@ -108,11 +108,11 @@ const EditUser: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="flex flex-row">
+      <div className="flex flex-col lg:flex-row">
         <Sidebar data={auth} />
         <div className="min-h-screen basis-4/5">
           <div className="px-7 py-5">
-            <div className="mt-2 w-full border-b border-gray-200 pb-5">
+            <div className="mt-2 hidden w-full border-b border-gray-200 pb-5 lg:block">
               <div className="flex cursor-pointer flex-row items-center gap-4 text-gray-400 transition-all duration-150 ease-in-out hover:text-gray-700">
                 <span className="text-xl">
                   <FiArrowLeft />
@@ -123,7 +123,7 @@ const EditUser: NextPage = () => {
               </div>
             </div>
 
-            <div className="mt-10">
+            <div className="mt-5 md:mt-10">
               <h1 className="text-3xl font-semibold tracking-wide">
                 Edit User
               </h1>
@@ -131,7 +131,7 @@ const EditUser: NextPage = () => {
 
             <form onSubmit={onUpdateUser}>
               <div className="mt-10 flex w-full flex-col gap-7">
-                <div className="w-1/2">
+                <div className="w-full lg:w-1/2">
                   <p className="mb-2 block text-xs font-bold uppercase tracking-wide text-gray-700">
                     Tourist Name
                   </p>
@@ -145,7 +145,7 @@ const EditUser: NextPage = () => {
                     icon={<AiOutlineUser />}
                   />
                 </div>
-                <div className="w-1/2">
+                <div className="w-full lg:w-1/2">
                   <p className="mb-2 block text-xs font-bold uppercase tracking-wide text-gray-700">
                     Tourist Email
                   </p>
@@ -159,7 +159,7 @@ const EditUser: NextPage = () => {
                     icon={<AiOutlineMail />}
                   />
                 </div>
-                <div className="w-1/2">
+                <div className="w-full lg:w-1/2">
                   <p className="mb-2 block text-xs font-bold uppercase tracking-wide text-gray-700">
                     Tourist Location
                   </p>

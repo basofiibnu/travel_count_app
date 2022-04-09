@@ -18,7 +18,7 @@ const Content = ({
       {userData && (
         <div className="min-h-screen basis-4/5">
           <div className="px-7 py-5">
-            <div className="mt-2 flex w-full flex-row items-center gap-4 border-b border-gray-300 pb-5">
+            <div className="mt-2 hidden w-full flex-row items-center gap-4 border-b border-gray-300 pb-5 md:flex">
               <div className="text-xl text-gray-400">
                 <HiUsers />
               </div>
@@ -26,12 +26,12 @@ const Content = ({
                 <p>List of all user will be shown here</p>
               </div>
             </div>
-            <div className="mt-10">
+            <div className="mt-5 md:mt-10">
               <h1 className="text-3xl font-semibold">List User</h1>
             </div>
 
-            <div className="mt-10">
-              <table className="w-full table-auto border-collapse border-slate-500">
+            <div className="mt-10 overflow-x-auto">
+              <table className="w-auto table-fixed border-collapse border-slate-500 md:w-full md:table-auto">
                 <thead>
                   <tr className="border-b border-gray-300">
                     <th className="py-3 text-left text-sm">Name</th>
@@ -87,7 +87,7 @@ const Content = ({
                 </tbody>
               </table>
               <div className="mt-4 flex flex-row items-center justify-between">
-                <div className="text-sm text-gray-500">
+                <div className="hidden text-sm text-gray-500 md:block">
                   Showing {userData.per_page} user of{' '}
                   {userData.totalrecord} users
                 </div>

@@ -82,8 +82,8 @@ const Login = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="h-screen">
-        <div className="flex flex-row">
-          <div className="basis-2/5 p-5">
+        <div className="flex flex-col lg:flex-row">
+          <div className="md:basis-5/5 p-5 lg:basis-2/5">
             <div className="text-4xl text-[#324FC7]">
               <SiYourtraveldottv />
             </div>

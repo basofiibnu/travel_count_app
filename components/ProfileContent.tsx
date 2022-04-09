@@ -10,6 +10,18 @@ interface DetailUser {
   setShowDelete: (e: boolean) => void;
 }
 
+interface Info {
+  name: string;
+  content: string;
+}
+
+const InfoContent = ({ name, content }: Info) => (
+  <div className="w-full md:w-64">
+    <p className="text-md text-gray-500">{name}</p>
+    <p className="text-lg text-black">{content}</p>
+  </div>
+);
+
 const ProfileContent = ({
   userData,
   showDelete,
@@ -18,7 +30,7 @@ const ProfileContent = ({
   return (
     <div className="min-h-screen basis-4/5">
       <div className="px-7 py-5">
-        <div className="mt-2 w-full border-b border-gray-200 pb-5">
+        <div className="mt-2 hidden w-full border-b border-gray-200 pb-5 lg:block">
           <div className="flex cursor-pointer flex-row items-center gap-4 text-gray-400 transition-all duration-150 ease-in-out hover:text-gray-700">
             <span className="text-xl">
               <FiArrowLeft />
@@ -65,41 +77,31 @@ const ProfileContent = ({
           </div>
         </div>
 
-        <div className="mt-7">
+        <div className="mt-5 md:mt-7">
           <div className="mb-5">
             <h2 className="text-xl font-semibold">
               General Information
             </h2>
           </div>
-          <div className="mb-5 flex flex-row items-center justify-start">
-            <div className="w-64">
-              <p className="text-md text-gray-500">Tourist Name</p>
-              <p className="text-lg text-black">
-                {userData.tourist_name}
-              </p>
-            </div>
-            <div className="w-64">
-              <p className="text-md text-gray-500">Created at</p>
-              <p className="text-lg text-black">
-                {userData.createdat.substring(0, 10)}
-              </p>
-            </div>
+          <div className="mb-3 flex flex-col items-center justify-start gap-3 md:mb-5 md:flex-row">
+            <InfoContent
+              name="Tourist Name"
+              content={userData.tourist_name}
+            />
+            <InfoContent
+              name="Created At"
+              content={userData.createdat.substring(0, 10)}
+            />
           </div>
-          <div className="flex flex-row items-center justify-start">
-            <div className="w-64">
-              <p className="text-md text-gray-500">
-                Tourist Location
-              </p>
-              <p className="text-lg text-black">
-                {userData.tourist_location}
-              </p>
-            </div>
-            <div className="w-64">
-              <p className="text-md text-gray-500">Tourist Email</p>
-              <p className="text-lg text-black">
-                {userData.tourist_email}
-              </p>
-            </div>
+          <div className="flex flex-col items-center justify-start gap-3 md:flex-row">
+            <InfoContent
+              name="Tourist Location"
+              content={userData.tourist_location}
+            />
+            <InfoContent
+              name="Tourist Email"
+              content={userData.tourist_email}
+            />
           </div>
         </div>
       </div>
