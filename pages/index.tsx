@@ -70,7 +70,7 @@ const Home: NextPage = () => {
             getUserList={getUserList}
           />
         ) : (
-          <div className="flex min-h-screen items-center justify-center">
+          <div className="flex min-h-screen items-center justify-center px-5 text-center">
             <p className="text-2xl lowercase tracking-wide">
               there is no data that can be retrieved because api url
               is served under http, not https.
