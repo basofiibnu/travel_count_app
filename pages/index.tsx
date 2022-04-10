@@ -11,8 +11,8 @@ import { UserData } from '../typings';
 
 const Home: NextPage = () => {
   const [userData, setUserData] = useState<UserData>();
-  const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [page, setPage] = useState<number>(1);
   const [auth, setAuth]: any = useRecoilState(authState);
   const Router = useRouter();
   const { Token } = auth;
@@ -43,7 +43,7 @@ const Home: NextPage = () => {
       if (storage) {
         setAuth(JSON.parse(storage));
       } else {
-        Router.push('/login');
+        Router.push('/auth');
       }
     }
   }, [auth]);

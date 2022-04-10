@@ -14,8 +14,8 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ data }: SidebarProps) => {
-  const [showLogout, setShowLogout] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [showLogout, setShowLogout] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const setAuthState = useSetRecoilState(authState);
   const Router = useRouter();
 
@@ -24,7 +24,7 @@ const Sidebar = ({ data }: SidebarProps) => {
     window.localStorage.removeItem('user');
     setAuthState([]);
 
-    Router.push('/login');
+    Router.push('/auth');
   };
 
   return (

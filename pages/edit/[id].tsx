@@ -88,7 +88,7 @@ const EditUser: NextPage = () => {
       if (storage) {
         setAuth(JSON.parse(storage));
       } else {
-        router.push('/login');
+        router.push('/auth');
       }
     }
   }, [auth]);

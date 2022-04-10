@@ -10,7 +10,7 @@ import { ClipLoader } from 'react-spinners';
 import { useSetRecoilState } from 'recoil';
 import { authState } from '../atoms/states';
 
-const Login = () => {
+const Auth = () => {
   const [isSignin, setIsSignin] = useState<boolean>(true);
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -241,4 +241,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Auth;

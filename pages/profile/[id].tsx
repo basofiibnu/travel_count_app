@@ -11,10 +11,10 @@ import Modal from '../../components/Modal';
 import { User } from '../../typings';
 
 const Profile: NextPage = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [userDetail, setUserDetail] = useState<User>();
-  const [showDelete, setShowDelete] = useState(false);
-  const [loadingDelete, setLoadingDelete] = useState(false);
+  const [showDelete, setShowDelete] = useState<boolean>(false);
+  const [loadingDelete, setLoadingDelete] = useState<boolean>(false);
   const [auth, setAuth]: any = useRecoilState(authState);
 
   const router = useRouter();
@@ -70,7 +70,7 @@ const Profile: NextPage = () => {
       if (storage) {
         setAuth(JSON.parse(storage));
       } else {
-        router.push('/login');
+        router.push('/auth');
       }
     }
   }, [auth]);

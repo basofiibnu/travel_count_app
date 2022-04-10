@@ -50,7 +50,7 @@ const Pagination = ({
       <li
         className={`flex h-6 w-full items-center rounded-lg bg-transparent px-3 text-center text-xl text-black transition-all duration-150 ease-in-out ${
           currentPage === 1
-            ? 'cursor-none'
+            ? 'cursor-not-allowed'
             : 'cursor-pointer hover:bg-gray-400'
         }`}
         onClick={onPrevious}
@@ -90,7 +90,7 @@ const Pagination = ({
       <li
         className={`flex h-6 w-full items-center rounded-lg bg-transparent px-3 py-1 text-center text-xl text-black transition-all duration-150 ease-in-out ${
           currentPage === lastPage
-            ? 'cursor-none'
+            ? 'cursor-not-allowed'
             : 'cursor-pointer hover:bg-gray-100'
         }`}
         onClick={onNext}

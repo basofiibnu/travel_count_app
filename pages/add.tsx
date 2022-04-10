@@ -15,12 +15,12 @@ import Link from 'next/link';
 
 const AddUser: NextPage = () => {
   const [auth, setAuth]: any = useRecoilState(authState);
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [message, setMessage] = useState();
-  const [status, setStatus] = useState();
-  const [location, setLocation] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState<string>('');
+  const [name, setName] = useState<string>('');
+  const [message, setMessage] = useState<string>();
+  const [status, setStatus] = useState<number>();
+  const [location, setLocation] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
 
   const router = useRouter();
 
@@ -59,7 +59,7 @@ const AddUser: NextPage = () => {
       if (storage) {
         setAuth(JSON.parse(storage));
       } else {
-        router.push('/login');
+        router.push('/auth');
       }
     }
   }, [auth]);

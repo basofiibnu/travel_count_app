@@ -2,9 +2,9 @@ import Link from 'next/link';
 import React, { useState, Fragment } from 'react';
 import { FiEdit } from 'react-icons/fi';
 import { MdOutlineDelete } from 'react-icons/md';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import TimeAgo from 'timeago-react';
-import { authState } from '../atoms/states';
+import { Auth, authValue } from '../atoms/states';
 import Modal from './Modal';
 
 interface UserData {
@@ -26,10 +26,9 @@ const User = ({
   location,
   getUserList,
 }: UserData) => {
-  const [showDelete, setShowDelete] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [auth, setAuth]: any = useRecoilState(authState);
-  const { Token } = auth;
+  const [showDelete, setShowDelete] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const { Token } = useRecoilValue<Auth>(authValue);
 
   const onDelete = async () => {
     const baseUrl = `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/Tourist/${id}`;
