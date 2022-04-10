@@ -58,11 +58,14 @@ const Pagination = ({
         <MdChevronLeft />
       </li>
       {paginationRange &&
-        paginationRange.map((pageNumber: number | string) => {
+        paginationRange.map((pageNumber: number | string, i) => {
           // If the pageItem is a DOT, render the DOTS unicode character
           if (pageNumber.toString() === DOTS) {
             return (
-              <li className="pagination-item dots" key={pageNumber}>
+              <li
+                className="pagination-item dots cursor-not-allowed"
+                key={`${pageNumber} ${i}`}
+              >
                 &#8230;
               </li>
             );
